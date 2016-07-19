@@ -6,7 +6,7 @@
 #    By: telain <telain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/22 17:19:39 by telain            #+#    #+#              #
-#    Updated: 2016/07/18 19:02:31 by telain           ###   ########.fr        #
+#    Updated: 2016/07/19 18:36:03 by telain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ FLAGS = -Wall -Wextra -Werror
 SRC =  main.c\
 	   parse_arg.c\
 	   put_error.c\
+	   get_rights.c\
 
 OBJ = $(patsubst %.c,%.o,$(addprefix $(PATH_SRC), $(SRC)))
 

@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:24:35 by telain            #+#    #+#             */
-/*   Updated: 2016/07/18 20:26:14 by telain           ###   ########.fr       */
+/*   Updated: 2016/07/19 19:04:25 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@ typedef struct		s_data
 {
 	char			*name;
 	char			*param;
+	char			*rights;
+	int				size;
 	int				cur_arg;
 	DIR				*dir;
 	struct dirent	*ent;
 	struct stat		s;
-	struct passwd	pswd;
+	struct passwd	*pswd;
+	struct group	*grp;;
 }					t_data;
 
 /*
@@ -46,12 +49,21 @@ void	data_init(t_data *d);
 */
 
 int		parse_arg(int ac, char **av, t_data *d);
-int		search_arg(char *av);
+int		search_arg(char *av, t_data *d);
 
 /*
 **	put_error.c
 */
 
-void	put_error(int err);
+void	put_error(int err, t_data *d);
+
+/*
+**	get_rights.c
+*/
+
+void	get_rights(t_data *d, struct stat *s);
+void	get_urights(t_data *d, struct stat *s);
+void	get_grights(t_data *d, struct stat *s);
+void	get_orights(t_data *d, struct stat *s);
 
 #endif
