@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/19 18:32:09 by telain            #+#    #+#             */
-/*   Updated: 2016/07/19 19:40:24 by telain           ###   ########.fr       */
+/*   Updated: 2016/07/20 16:12:23 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	get_rights(t_data *d, struct stat *s)
 	get_urights(d, s);
 	get_grights(d, s);
 	get_orights(d, s);
+	get_type(d);
 }
 
 void	get_urights(t_data *d, struct stat *s)

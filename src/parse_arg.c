@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 18:54:29 by telain            #+#    #+#             */
-/*   Updated: 2016/07/19 19:49:17 by telain           ###   ########.fr       */
+/*   Updated: 2016/07/20 17:10:27 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		parse_arg(int ac, char **av, t_data *d)
 {
 	if (ac == 1)
 	{
-		d->name = ".";
+		d->name = ft_strdup("./");
 		return (0);
 	}	
 	else if (av[1][0] == '-')
@@ -36,14 +36,14 @@ int		parse_arg(int ac, char **av, t_data *d)
 			d->cur_arg++;
 		}
 		if (!av[d->cur_arg])
-			d->name = ".";
+			d->name = ft_strdup("./");
 		else
-			d->name = ft_strdup(av[d->cur_arg]);
+			d->name = ft_strcat("./", ft_strdup(av[d->cur_arg]));
 		return (0);
 	}
 	else
 	{
-		d->name = av[1];
+		d->name = ft_strdup(av[1]);
 		return (1);
 	}
 	return (0);
@@ -62,6 +62,6 @@ int		search_arg(char *av, t_data *d)
 			c++;
 	}
 	if (c > 1)
-		put_error(1, d);
+		put_error(ERR_USAGE, d);
 	return (c);
 }

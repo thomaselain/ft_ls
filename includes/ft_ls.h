@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:24:35 by telain            #+#    #+#             */
-/*   Updated: 2016/07/19 19:04:25 by telain           ###   ########.fr       */
+/*   Updated: 2016/07/20 17:41:32 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <sys/types.h>
 # include <uuid/uuid.h>
 # include <pwd.h>
+# define ERR_NOFILE -1
+# define ERR_USAGE 1
+# define ERR_NORIGHT 2
 
 typedef struct		s_data
 {
@@ -65,5 +68,11 @@ void	get_rights(t_data *d, struct stat *s);
 void	get_urights(t_data *d, struct stat *s);
 void	get_grights(t_data *d, struct stat *s);
 void	get_orights(t_data *d, struct stat *s);
+
+/*
+**	get_type.c
+*/
+
+void	get_type(t_data *d);
 
 #endif
