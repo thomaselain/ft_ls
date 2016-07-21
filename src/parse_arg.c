@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 18:54:29 by telain            #+#    #+#             */
-/*   Updated: 2016/07/20 17:10:27 by telain           ###   ########.fr       */
+/*   Updated: 2016/07/21 17:13:32 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int		parse_arg(int ac, char **av, t_data *d)
 {
+	char	*tmp;
+
+	tmp = ft_strdup("./");
 	if (ac == 1)
 	{
 		d->name = ft_strdup("./");
@@ -38,12 +41,13 @@ int		parse_arg(int ac, char **av, t_data *d)
 		if (!av[d->cur_arg])
 			d->name = ft_strdup("./");
 		else
-			d->name = ft_strcat("./", ft_strdup(av[d->cur_arg]));
+			d->name = ft_strjoin("./", av[d->cur_arg]);
 		return (0);
 	}
 	else
 	{
-		d->name = ft_strdup(av[1]);
+		ft_putstr("Ici\n");
+		d->name = ft_strjoin("./", av[1]);
 		return (1);
 	}
 	return (0);

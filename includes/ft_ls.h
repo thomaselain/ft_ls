@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:24:35 by telain            #+#    #+#             */
-/*   Updated: 2016/07/20 17:41:32 by telain           ###   ########.fr       */
+/*   Updated: 2016/07/21 17:30:53 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_LS_H
 
 #include <stdio.h>
+# include <time.h>
 # include "libft.h"
 # include <stdlib.h>
 # include <fcntl.h>
@@ -22,9 +23,12 @@
 # include <sys/types.h>
 # include <uuid/uuid.h>
 # include <pwd.h>
+# include <grp.h>
 # define ERR_NOFILE -1
 # define ERR_USAGE 1
 # define ERR_NORIGHT 2
+
+typedef struct
 
 typedef struct		s_data
 {
@@ -37,7 +41,8 @@ typedef struct		s_data
 	struct dirent	*ent;
 	struct stat		s;
 	struct passwd	*pswd;
-	struct group	*grp;;
+	struct group	*grp;
+	t_list			**begin;
 }					t_data;
 
 /*
