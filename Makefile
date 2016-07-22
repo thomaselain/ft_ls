@@ -6,12 +6,12 @@
 #    By: telain <telain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/22 17:19:39 by telain            #+#    #+#              #
-#    Updated: 2016/07/20 16:10:50 by telain           ###   ########.fr        #
+#    Updated: 2016/07/22 13:50:33 by telain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
-PATH_SRC = src/
+PATH_SRC = src_list/
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
@@ -21,6 +21,7 @@ SRC =  main.c\
 	   put_error.c\
 	   get_rights.c\
 	   get_type.c\
+	   list.c\
 
 
 OBJ = $(patsubst %.c,%.o,$(addprefix $(PATH_SRC), $(SRC)))

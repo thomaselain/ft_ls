@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:24:35 by telain            #+#    #+#             */
-/*   Updated: 2016/07/21 17:30:53 by telain           ###   ########.fr       */
+/*   Updated: 2016/07/22 15:41:49 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,14 @@
 # define ERR_USAGE 1
 # define ERR_NORIGHT 2
 
-typedef struct
+typedef struct		s_file
+{
+	char			*name;
+	char			*date;
+	int				right;
+	struct s_file	*next;
+	struct s_file	*prev;
+}					t_file;
 
 typedef struct		s_data
 {
@@ -42,7 +49,7 @@ typedef struct		s_data
 	struct stat		s;
 	struct passwd	*pswd;
 	struct group	*grp;
-	t_list			**begin;
+	t_file			**begin;
 }					t_data;
 
 /*
@@ -79,5 +86,12 @@ void	get_orights(t_data *d, struct stat *s);
 */
 
 void	get_type(t_data *d);
+
+/*
+**	list.c
+*/
+
+void	new_list(t_data *d);
+t_file	*new_file(t_file *previous, char *name, char *date);
 
 #endif
