@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:23:17 by telain            #+#    #+#             */
-/*   Updated: 2016/07/22 16:37:18 by telain           ###   ########.fr       */
+/*   Updated: 2016/07/25 19:29:56 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,48 +31,29 @@ void	data_init(t_data *d)
 	d->cur_arg = 1;
 	d->name = ft_strnew(1);
 	d->param = ft_strnew(1);
+	new_list(d);
 }
 
 void	read_file(t_data *d)
 {
+	t_file		*file;
+
 	printf("\e[35mFOLDER we are curently in : \"%s\"\e[0m\n", d->name);
 	if (!(d->dir = opendir(d->name)))
-		put_error(ERR_NOFILE, d);
-	ft_putstr("\n");
+	{
+		ft_putstr("Coucou\n");
+		put_error(ERR_NOFILE, d->name);
+	}
+	file = new_file(NULL, d, d->name);
+//	*d->begin = file;
 	while ((d->ent = readdir(d->dir)) != 0)
 	{
-		if (stat(d->name, &(d->s)) != 0)
-		{
-			ft_putstr("ici\n");
-			put_error(ERR_NOFILE, d);
-		}
-		stat(d->ent->d_name, &(d->s));
-		d->pswd = getpwuid(d->s.st_uid);
-		d->grp = getgrgid(d->s.st_gid);
-		get_rights(d, &(d->s));
-		if (d->ent->d_name[0] == '.' && !ft_strchr(d->param, 'a'))
+		file->next = new_file(file, d, d->ent->d_name);
+		if (file->next->file_name[ft_strlen(d->name)] == '.' && !ft_strchr(d->param, 'a'))
 			;
 		else
-		{
-			ft_putstr(d->rights);
-			ft_putstr("  ");
-			if (d->s.st_nlink < 10)
-				ft_putstr(" ");
-			ft_putnbr(d->s.st_nlink);
-			ft_putstr(" ");
-			ft_putstr(d->pswd->pw_name);
-			ft_putstr("\t");
-			ft_putstr(d->grp->gr_name);
-			ft_putstr("\t");
-			ft_putnbr(d->s.st_size);
-			ft_putstr("\t");
-			ft_putstr(ft_strsub(ctime(&(d->s.st_mtimespec.tv_sec)), 4, 12));
-			ft_putstr(" ");
-			ft_putstr(d->ent->d_name);
-			ft_putstr("\n");
-		}
-		d->rights = ft_strdup("----------");
+			display_infos(file->next);
+		file = file->next;
 	}
-	ft_putstr("\n");
 	closedir(d->dir);
 }

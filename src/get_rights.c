@@ -6,46 +6,63 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/19 18:32:09 by telain            #+#    #+#             */
-/*   Updated: 2016/07/21 17:14:02 by telain           ###   ########.fr       */
+/*   Updated: 2016/07/25 15:58:10 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-void	get_rights(t_data *d, struct stat *s)
+void	get_rights(t_file *f, struct stat *s)
 {
-	get_urights(d, s);
-	get_grights(d, s);
-	get_orights(d, s);
-	get_type(d);
+	f->rights = ft_strdup("----------");
+	get_urights(f, s);
+	get_grights(f, s);
+	get_orights(f, s);
+	get_type(f, s);
 }
 
-void	get_urights(t_data *d, struct stat *s)
+void	get_urights(t_file *f, struct stat *s)
 {
 	if ((s->st_mode & S_IRUSR) == S_IRUSR)
-		d->rights[1] = 'r';
+		f->rights[1] = 'r';
 	if ((s->st_mode & S_IWUSR) == S_IWUSR)
-		d->rights[2] = 'w';
+		f->rights[2] = 'w';
 	if ((s->st_mode & S_IXUSR) == S_IXUSR)
-		d->rights[3] = 'x';
+		f->rights[3] = 'x';
 }
 
-void	get_grights(t_data *d, struct stat *s)
+void	get_grights(t_file *f, struct stat *s)
 {
 	if ((s->st_mode & S_IRGRP) == S_IRGRP)
-		d->rights[4] = 'r';
+		f->rights[4] = 'r';
 	if ((s->st_mode & S_IWGRP) == S_IWGRP)
-		d->rights[5] = 'w';
+		f->rights[5] = 'w';
 	if ((s->st_mode & S_IXGRP) == S_IXGRP)
-		d->rights[6] = 'x';
+		f->rights[6] = 'x';
 }
 
-void	get_orights(t_data *d, struct stat *s)
+void	get_orights(t_file *f, struct stat *s)
 {
 	if ((s->st_mode & S_IROTH) == S_IROTH)
-		d->rights[7] = 'r';
+		f->rights[7] = 'r';
 	if ((s->st_mode & S_IWOTH) == S_IWOTH)
-		d->rights[8] = 'w';
+		f->rights[8] = 'w';
 	if ((s->st_mode & S_IXOTH) == S_IXOTH)
-		d->rights[9] = 'x';
+		f->rights[9] = 'x';
+}
+
+void	get_type(t_file *f, struct stat *s)
+{
+	if ((S_IFMT & s->st_mode) == S_IFSOCK)
+		f->rights[0] = 's';
+	else if ((S_IFMT & s->st_mode) == S_IFLNK)
+		f->rights[0] = 'l';
+	else if ((S_IFMT & s->st_mode) == S_IFBLK)
+		f->rights[0] = 'b';
+	else if ((S_IFMT & s->st_mode) == S_IFDIR)
+		f->rights[0] = 'd';
+	else if ((S_IFMT & s->st_mode) == S_IFCHR)
+		f->rights[0] = 'c';
+	else if ((S_IFMT & s->st_mode) == S_IFIFO)
+		f->rights[0] = 'p';
 }
