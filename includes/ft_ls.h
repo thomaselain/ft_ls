@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:24:35 by telain            #+#    #+#             */
-/*   Updated: 2016/07/22 15:41:49 by telain           ###   ########.fr       */
+/*   Updated: 2016/07/26 14:41:26 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,14 @@
 
 typedef struct		s_file
 {
-	char			*name;
+	char			*file_name;
 	char			*date;
-	int				right;
+	char			*rights;
+	char			*grp_name;
+	char			*usr_name;
+	char			*path;
+	int				links;
+	int				size;
 	struct s_file	*next;
 	struct s_file	*prev;
 }					t_file;
@@ -64,34 +69,35 @@ void	data_init(t_data *d);
 */
 
 int		parse_arg(int ac, char **av, t_data *d);
-int		search_arg(char *av, t_data *d);
+int		search_arg(char *av);
 
 /*
 **	put_error.c
 */
 
-void	put_error(int err, t_data *d);
+void	put_error(int err, char *file);
 
 /*
 **	get_rights.c
 */
 
-void	get_rights(t_data *d, struct stat *s);
-void	get_urights(t_data *d, struct stat *s);
-void	get_grights(t_data *d, struct stat *s);
-void	get_orights(t_data *d, struct stat *s);
-
-/*
-**	get_type.c
-*/
-
-void	get_type(t_data *d);
+void	get_rights(t_file *f, struct stat *s);
+void	get_urights(t_file *f, struct stat *s);
+void	get_grights(t_file *f, struct stat *s);
+void	get_orights(t_file *f, struct stat *s);
+void	get_type(t_file *f, struct stat *s);
 
 /*
 **	list.c
 */
 
 void	new_list(t_data *d);
-t_file	*new_file(t_file *previous, char *name, char *date);
+t_file	*new_file(t_file *previous, t_data *d, char *name);
+
+/*
+**	display_infos.c
+*/
+
+void	display_infos(t_file *f, t_data *d);
 
 #endif

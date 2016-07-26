@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/22 13:41:00 by telain            #+#    #+#             */
-/*   Updated: 2016/07/25 19:27:55 by telain           ###   ########.fr       */
+/*   Updated: 2016/07/26 15:07:33 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ t_file	*new_file(t_file *previous, t_data *d, char *str)
 	struct group	*grp;
 
 	new = ft_memalloc(sizeof(struct s_file*) * 10);
-	new->file_name = ft_strjoin(d->name, new->file_name);
-	if (ft_strcmp(new->file_name, str))
-		new->file_name = ft_strjoin(d->name, str);
-	if (stat(new->file_name, &s) != 0)
-		put_error(ERR_NOFILE, new->file_name);
+	new->path = ft_strjoin(d->name, new->path);
+	if (ft_strcmp(new->path, str))
+		new->path = ft_strjoin(d->name, str);
+	if (stat(new->path, &s) != 0)
+		put_error(ERR_NOFILE, new->path);
 	pswd = getpwuid(s.st_uid);
 	grp = getgrgid(s.st_gid);
 	new->date =	ft_strdup(ft_strsub(ctime(&s.st_mtimespec.tv_sec), 4, 12));
@@ -38,6 +38,7 @@ t_file	*new_file(t_file *previous, t_data *d, char *str)
 	new->size = s.st_size;
 	new->grp_name = grp->gr_name;
 	new->usr_name = pswd->pw_name;
+	new->file_name = ft_strdup(str);
 	new->next = NULL;
 	if (previous)
 		previous->next = new;
