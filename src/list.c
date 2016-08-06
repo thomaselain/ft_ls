@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/22 13:41:00 by telain            #+#    #+#             */
-/*   Updated: 2016/08/06 14:06:57 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/06 16:01:52 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_file	*new_file(t_file *previous, t_data *d, char *str)
 	pswd = getpwuid(s.st_uid);
 	grp = getgrgid(s.st_gid);
 	get_rights(new, &s);
-	new->date =	ft_strsub(ctime(&(s.st_mtimespec.tv_sec)), 4, 12);
+	new->date = ft_strsub(ctime(&(s.st_mtime)), 4, 12);
 	new->links = s.st_nlink;
 	new->size = s.st_size;
 	new->grp_name = grp->gr_name;
@@ -46,16 +46,14 @@ t_file	*new_file(t_file *previous, t_data *d, char *str)
 	return (new);
 }
 
-void	sort_list(t_data *d, t_file *first)
+void	sort_list(t_data *d, t_file *first, int i)
 {
 	t_file	*tmp;
 	t_file	*begin;
-	int		i;
 	int		rev;
 
 	begin = first;
 	rev = (ft_strchr(d->param, 'r')) ? -1 : 1;
-	i = 1;
 	while (i == 1)
 	{
 		i = 0;
@@ -74,6 +72,4 @@ void	sort_list(t_data *d, t_file *first)
 		}
 		first = begin;
 	}
-	if (d)
-		;
 }
