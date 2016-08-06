@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/22 13:41:00 by telain            #+#    #+#             */
-/*   Updated: 2016/08/06 16:01:52 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/06 17:39:39 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ t_file	*new_file(t_file *previous, t_data *d, char *str)
 
 	new = ft_memalloc(sizeof(struct s_file*) * 10);
 	new->path = ft_strjoin(d->name, new->path);
-	if (ft_strcmp(new->path, str))
+	if (ft_strcmp(new->path, str) && !ft_strchr(d->name, '~'))
 		new->path = ft_strjoin(d->name, str);
 	if (stat(new->path, &s) != 0)
 		put_error(ERR_NOFILE, new->path);
 	pswd = getpwuid(s.st_uid);
 	grp = getgrgid(s.st_gid);
 	get_rights(new, &s);
-	new->date = ft_strsub(ctime(&(s.st_mtime)), 4, 12);
+	new->date = ft_strsub(ctime(&(s.st_mtimespec.tv_sec)), 4, 12);
 	new->links = s.st_nlink;
 	new->size = s.st_size;
 	new->grp_name = grp->gr_name;

@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:23:17 by telain            #+#    #+#             */
-/*   Updated: 2016/08/06 13:56:01 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/06 17:35:32 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,17 @@ void	read_file(t_data *d)
 	ft_putstr(d->name);
 	ft_putendl(" :");
 	if (!(d->dir = opendir(d->name)))
-	{
-		ft_putstr("Coucou\n");
 		put_error(ERR_NOFILE, d->name);
-	}
 	*d->begin = new_file(NULL, d, d->name);
 	file = *d->begin;
 	while ((d->ent = readdir(d->dir)) != 0)
 	{
 		file->next = new_file(file, d, d->ent->d_name);
-/*		if (file->next->file_name[0] == '.' && !ft_strchr(d->param, 'a'))
-			;
-		else
-			display_infos(file->next, d);
-*/		file = file->next;
+		file = file->next;
 	}
-	sort_list(d, *d->begin);
+	d->biggest = 1;
+	d->biggest = find_biggest_size(d);
+	sort_list(d, *d->begin, 1);
 	file = *d->begin;
 	file = file->next;
 	while (file)

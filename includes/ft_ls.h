@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:24:35 by telain            #+#    #+#             */
-/*   Updated: 2016/08/05 13:38:15 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/06 17:00:59 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ typedef struct		s_data
 	int				cur_arg;
 	DIR				*dir;
 	struct dirent	*ent;
-	struct stat		s;
-	struct passwd	*pswd;
-	struct group	*grp;
+	int				biggest;
 	t_file			**begin;
 }					t_data;
 
@@ -70,6 +68,7 @@ void	data_init(t_data *d);
 
 int		parse_arg(int ac, char **av, t_data *d);
 int		search_arg(char *av);
+void	find_param(t_data *d, char **av);
 
 /*
 **	put_error.c
@@ -93,7 +92,7 @@ void	get_type(t_file *f, struct stat *s);
 
 void	new_list(t_data *d);
 t_file	*new_file(t_file *previous, t_data *d, char *name);
-void	sort_list(t_data *d, t_file *first);
+void	sort_list(t_data *d, t_file *first, int i);
 void	swap_files(t_file *file1, t_file *file2);
 
 /*
@@ -101,5 +100,7 @@ void	swap_files(t_file *file1, t_file *file2);
 */
 
 void	display_infos(t_file *f, t_data *d);
+void	put_n_spaces(int n);
+int		find_biggest_size(t_data *d);
 
 #endif
