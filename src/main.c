@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:23:17 by telain            #+#    #+#             */
-/*   Updated: 2016/07/26 15:08:02 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/06 13:56:01 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,23 @@ void	read_file(t_data *d)
 		ft_putstr("Coucou\n");
 		put_error(ERR_NOFILE, d->name);
 	}
-	file = new_file(NULL, d, d->name);
-//	*d->begin = file;    Pour la recursive (revenir au debut de la liste)
+	*d->begin = new_file(NULL, d, d->name);
+	file = *d->begin;
 	while ((d->ent = readdir(d->dir)) != 0)
 	{
 		file->next = new_file(file, d, d->ent->d_name);
-		if (file->next->file_name[0] == '.' && !ft_strchr(d->param, 'a'))
+/*		if (file->next->file_name[0] == '.' && !ft_strchr(d->param, 'a'))
 			;
 		else
 			display_infos(file->next, d);
+*/		file = file->next;
+	}
+	sort_list(d, *d->begin);
+	file = *d->begin;
+	file = file->next;
+	while (file)
+	{
+		display_infos(file, d);
 		file = file->next;
 	}
 	closedir(d->dir);

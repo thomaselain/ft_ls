@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/22 13:41:00 by telain            #+#    #+#             */
-/*   Updated: 2016/07/26 15:13:15 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/06 14:06:57 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_file	*new_file(t_file *previous, t_data *d, char *str)
 		put_error(ERR_NOFILE, new->path);
 	pswd = getpwuid(s.st_uid);
 	grp = getgrgid(s.st_gid);
-	new->date =	ft_strdup(ft_strsub(ctime(&s.st_mtimespec.tv_sec), 4, 12));
 	get_rights(new, &s);
+	new->date =	ft_strsub(ctime(&(s.st_mtimespec.tv_sec)), 4, 12);
 	new->links = s.st_nlink;
 	new->size = s.st_size;
 	new->grp_name = grp->gr_name;
@@ -44,4 +44,36 @@ t_file	*new_file(t_file *previous, t_data *d, char *str)
 		previous->next = new;
 	new->prev = previous;
 	return (new);
+}
+
+void	sort_list(t_data *d, t_file *first)
+{
+	t_file	*tmp;
+	t_file	*begin;
+	int		i;
+	int		rev;
+
+	begin = first;
+	rev = (ft_strchr(d->param, 'r')) ? -1 : 1;
+	i = 1;
+	while (i == 1)
+	{
+		i = 0;
+		while (first->next->next)
+		{
+			if (ft_strcmp(first->next->file_name,
+						first->next->next->file_name) * rev > 0)
+			{
+				tmp = first->next;
+				first->next = first->next->next;
+				tmp->next = first->next->next;
+				first->next->next = tmp;
+				i = 1;
+			}
+			first = first->next;
+		}
+		first = begin;
+	}
+	if (d)
+		;
 }

@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:24:35 by telain            #+#    #+#             */
-/*   Updated: 2016/07/26 14:41:26 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/05 13:38:15 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	get_type(t_file *f, struct stat *s);
 
 void	new_list(t_data *d);
 t_file	*new_file(t_file *previous, t_data *d, char *name);
+void	sort_list(t_data *d, t_file *first);
+void	swap_files(t_file *file1, t_file *file2);
 
 /*
 **	display_infos.c
