@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:23:17 by telain            #+#    #+#             */
-/*   Updated: 2016/08/06 17:35:32 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/10 15:15:18 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	read_file(t_data *d)
 {
 	t_file		*file;
 
+	ft_putnendl(d->cur_arg);
+	d->cur_arg++;
 	ft_putstr(d->name);
 	ft_putendl(" :");
 	if (!(d->dir = opendir(d->name)))
@@ -57,5 +59,9 @@ void	read_file(t_data *d)
 		display_infos(file, d);
 		file = file->next;
 	}
+	ft_putstr("Cur_arg : ");
+	ft_putnendl(d->cur_arg);
+	ft_putstr("\n\n");
+	d->cur_arg++;
 	closedir(d->dir);
 }

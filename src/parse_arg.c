@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 18:54:29 by telain            #+#    #+#             */
-/*   Updated: 2016/08/06 17:42:06 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/10 14:02:46 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ int		parse_arg(int ac, char **av, t_data *d)
 			d->name = ft_strjoin("./", av[d->cur_arg]);
 			d->name = ft_strjoin(d->name, "/");
 		}
-		return (0);
 	}
-	else if (!ft_strchr(av[1], '~'))
-		d->name = ft_strjoin(av[1], "/");		
 	else
 	{
-		d->name = ft_strjoin("./", av[1]);
-		d->name = ft_strjoin(d->name, "/");
+		if (av[d->cur_arg][0] != '~')
+			d->name = ft_strjoin("./", av[d->cur_arg]);
+		d->name = ft_strjoin(av[d->cur_arg], "/");
 		return (1);
 	}
+	if (av[d->cur_arg] && !ft_strchr(av[d->cur_arg], '~'))
+		d->name = ft_strjoin(av[d->cur_arg], "/");		
 	return (0);
 }
 
@@ -61,8 +61,8 @@ int		search_arg(char *av)
 
 void	find_param(t_data *d, char **av)
 {
-	while (av[d->cur_arg] && search_arg(av[d->cur_arg]) == 1)
-	{
+//		A changer pour empecher de mettre des parametres qui n'existent pas 
+	while (av[d->cur_arg] && search_arg(av[d->cur_arg]) == 1) 	{
 		if (ft_strchr(av[d->cur_arg], 'l'))
 			d->param = ft_strcat(d->param, "l");
 		if (ft_strchr(av[d->cur_arg], 'a'))
