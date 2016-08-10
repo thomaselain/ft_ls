@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:23:17 by telain            #+#    #+#             */
-/*   Updated: 2016/08/10 18:11:09 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/10 20:31:49 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		main(int ac, char **av)
 	while (d.cur_arg < ac || (d.cur_arg == ac && ac == 1))
 	{
 		find_param(&d, av);
+		ft_putendl(d.param);
 		parse_arg(ac, av, &d);
 		read_file(&d);
 	}
@@ -58,6 +59,8 @@ int		read_file(t_data *d)
 	d->biggest = 1;
 	d->biggest = find_biggest_size(d);
 	sort_list(d, *d->begin, 1);
+	if (ft_strchr(d->param, 't'))
+		sort_list_time(d, *d->begin, 1);
 	file = *d->begin;
 	file = file->next;
 	while (file)

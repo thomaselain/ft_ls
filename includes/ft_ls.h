@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:24:35 by telain            #+#    #+#             */
-/*   Updated: 2016/08/10 18:11:54 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/10 20:26:27 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,10 @@ void	get_type(t_file *f, struct stat *s);
 void	new_list(t_data *d);
 t_file	*new_file(t_file *previous, t_data *d, char *name);
 void	sort_list(t_data *d, t_file *first, int i);
-void	swap_files(t_file *file1, t_file *file2);
+void	sort_list_time(t_data *d, t_file *first, int i);
+void	swap_files(t_file *file);
+int		date_cmp(char *date1, char *date2);
+int		find_month(char *date);
 
 /*
 **	display_infos.c
