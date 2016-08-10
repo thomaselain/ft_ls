@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:24:35 by telain            #+#    #+#             */
-/*   Updated: 2016/08/06 17:00:59 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/10 18:11:54 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define ERR_NOFILE -1
 # define ERR_USAGE 1
 # define ERR_NORIGHT 2
+# define TRUE 1
+# define FALSE 0
 
 typedef struct		s_file
 {
@@ -52,6 +54,7 @@ typedef struct		s_data
 	DIR				*dir;
 	struct dirent	*ent;
 	int				biggest;
+	int				err_param;
 	t_file			**begin;
 }					t_data;
 
@@ -59,7 +62,7 @@ typedef struct		s_data
 **	main.c
 */
 
-void	read_file(t_data *d);
+int		read_file(t_data *d);
 void	data_init(t_data *d);
 
 /*
@@ -67,7 +70,7 @@ void	data_init(t_data *d);
 */
 
 int		parse_arg(int ac, char **av, t_data *d);
-int		search_arg(char *av);
+int		search_arg(char *av, t_data *d);
 void	find_param(t_data *d, char **av);
 
 /*

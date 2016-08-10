@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/18 19:01:35 by telain            #+#    #+#             */
-/*   Updated: 2016/08/10 15:13:28 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/10 18:23:43 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		put_error(int err, char *file)
 		ft_putendl("\" No such file or directory");
 	}
 	else if (err == ERR_USAGE)
-		ft_putendl("\e[32mUsage\e[0m : ./ft_ls [-la] [File(s)_name]");
+		ft_putendl("\e[32mUsage\e[0m : ./ft_ls [-lar\e[31mtR\e[0m] [File(s)_name]");
 	else if (err == ERR_NORIGHT)
 	{
 		ft_putstr("\"");

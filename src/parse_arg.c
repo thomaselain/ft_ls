@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 18:54:29 by telain            #+#    #+#             */
-/*   Updated: 2016/08/10 15:16:06 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/10 18:24:16 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		parse_arg(int ac, char **av, t_data *d)
 	}
 	else if (av[1][0] == '-')
 	{
-		find_param(d, av);
 		if (!av[d->cur_arg])
 			d->name = ft_strdup("./");
 		else
@@ -32,7 +31,7 @@ int		parse_arg(int ac, char **av, t_data *d)
 	}
 	else
 	{
-		if (av[d->cur_arg][0] != '~')
+		if (av[d->cur_arg] && av[d->cur_arg][0] != '~')
 			d->name = ft_strjoin("./", av[d->cur_arg]);
 		d->name = ft_strjoin(av[d->cur_arg], "/");
 		return (1);
@@ -42,7 +41,7 @@ int		parse_arg(int ac, char **av, t_data *d)
 	return (0);
 }
 
-int		search_arg(char *av)
+int		search_arg(char *av, t_data *d)
 {
 	int		i;
 	int		c;
@@ -53,6 +52,12 @@ int		search_arg(char *av)
 	{
 		if (av[i] == '-' && av[i + 1])
 			c++;
+		if (av[i] != 'l' && av[i] != 'a' && av[i] != 'r' && av[i] != 'R'
+				&& av[i] != 't' && av[i] != '-')
+		{
+			d->err_param = TRUE;
+			return (1);
+		}
 	}
 	if (c > 1)
 		put_error(ERR_USAGE, NULL);
@@ -61,20 +66,15 @@ int		search_arg(char *av)
 
 void	find_param(t_data *d, char **av)
 {
-//		A changer pour empecher de mettre des parametres qui n'existent pas 
-		
-	while (av[d->cur_arg] && search_arg(av[d->cur_arg]) == 1)
+	while (av[d->cur_arg] && search_arg(av[d->cur_arg], d) == 1)
 	{
-		if (ft_strchr(av[d->cur_arg], 'l'))
-			d->param = ft_strcat(d->param, "l");
-		if (ft_strchr(av[d->cur_arg], 'a'))
-			d->param = ft_strcat(d->param, "a");
-		if (ft_strchr(av[d->cur_arg], 'R'))
-			d->param = ft_strcat(d->param, "R");
-		if (ft_strchr(av[d->cur_arg], 'r'))
-			d->param = ft_strcat(d->param, "r");
-		if (ft_strchr(av[d->cur_arg], 't'))
-			d->param = ft_strcat(d->param, "t");
+		if (d->err_param == TRUE)
+		{
+			put_error(ERR_USAGE, d->name);
+			exit(0);
+		}
+		else
+			d->param = ft_strjoin(d->param, av[d->cur_arg]);
 		d->cur_arg++;
 	}
 }
