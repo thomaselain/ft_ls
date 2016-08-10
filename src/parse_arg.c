@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 18:54:29 by telain            #+#    #+#             */
-/*   Updated: 2016/08/10 14:02:46 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/10 15:16:06 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ int		search_arg(char *av)
 void	find_param(t_data *d, char **av)
 {
 //		A changer pour empecher de mettre des parametres qui n'existent pas 
-	while (av[d->cur_arg] && search_arg(av[d->cur_arg]) == 1) 	{
+		
+	while (av[d->cur_arg] && search_arg(av[d->cur_arg]) == 1)
+	{
 		if (ft_strchr(av[d->cur_arg], 'l'))
 			d->param = ft_strcat(d->param, "l");
 		if (ft_strchr(av[d->cur_arg], 'a'))
