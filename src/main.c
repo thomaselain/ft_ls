@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:23:17 by telain            #+#    #+#             */
-/*   Updated: 2016/08/10 20:31:49 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/11 22:43:20 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ int		main(int ac, char **av)
 	while (d.cur_arg < ac || (d.cur_arg == ac && ac == 1))
 	{
 		find_param(&d, av);
-		ft_putendl(d.param);
 		parse_arg(ac, av, &d);
-		read_file(&d);
+		read_file(&d, av);
 	}
 	return (0);
 }
@@ -34,20 +33,24 @@ void	data_init(t_data *d)
 	d->name = ft_strnew(1);
 	d->param = ft_strnew(1);
 	d->err_param = FALSE;
+	d->file_arg = FALSE;
 	new_list(d);
 }
 
-int		read_file(t_data *d)
+int		read_file(t_data *d, char **av)
 {
 	t_file		*file;
 
+	d->file_arg = FALSE;
 	ft_putstr(d->name);
 	ft_putendl(" :");
 	if (!(d->dir = opendir(d->name)))
 	{
-		put_error(ERR_NOFILE, d->name);
-		d->cur_arg++;
-		return (-1);
+		d->dir = opendir("./");
+		d->name = av[d->cur_arg];
+		d->file_arg = TRUE;
+//		put_error(ERR_NOFILE, d->name);
+//		d->cur_arg++;
 	}
 	*d->begin = new_file(NULL, d, d->name);
 	file = *d->begin;
@@ -65,7 +68,9 @@ int		read_file(t_data *d)
 	file = file->next;
 	while (file)
 	{
-		display_infos(file, d);
+		if ((!ft_strcmp(file->file_name, d->name) && d->file_arg == TRUE)
+				|| d->file_arg == FALSE)
+			display_infos(file, d);
 		file = file->next;
 	}
 	ft_putstr("\n");

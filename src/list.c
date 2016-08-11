@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/22 13:41:00 by telain            #+#    #+#             */
-/*   Updated: 2016/08/10 20:31:14 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/11 22:28:26 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_file	*new_file(t_file *previous, t_data *d, char *str)
 	new->path = ft_strjoin(d->name, new->path);
 	if (ft_strcmp(new->path, str) && !ft_strchr(d->name, '~'))
 		new->path = ft_strjoin(d->name, str);
-	if (stat(new->path, &s) != 0)
+	if (stat(new->path, &s) != 0 && d->file_arg == FALSE)
 		put_error(ERR_NOFILE, new->path);
 	pswd = getpwuid(s.st_uid);
 	grp = getgrgid(s.st_gid);

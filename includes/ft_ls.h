@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:24:35 by telain            #+#    #+#             */
-/*   Updated: 2016/08/10 20:26:27 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/11 22:23:13 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct		s_data
 	struct dirent	*ent;
 	int				biggest;
 	int				err_param;
+	int				file_arg;
 	t_file			**begin;
 }					t_data;
 
@@ -62,7 +63,7 @@ typedef struct		s_data
 **	main.c
 */
 
-int		read_file(t_data *d);
+int		read_file(t_data *d, char **av);
 void	data_init(t_data *d);
 
 /*

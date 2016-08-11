@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 18:54:29 by telain            #+#    #+#             */
-/*   Updated: 2016/08/10 21:04:24 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/11 22:28:00 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int		search_arg(char *av, t_data *d)
 	{
 		if (av[i] == '-' && av[i + 1])
 			c++;
-		if (av[i] != 'l' && av[i] != 'a' && av[i] != 'r' && av[i] != 'R'
+		else if (av[0] == '-' && 
+				av[i] != 'l' && av[i] != 'a' && av[i] != 'r' && av[i] != 'R'
 				&& av[i] != 't' && av[i] != '-')
 		{
 			d->err_param = TRUE;
@@ -60,7 +61,7 @@ int		search_arg(char *av, t_data *d)
 		}
 	}
 	if (c > 1)
-		put_error(ERR_USAGE, NULL);
+		d->err_param = TRUE;
 	return (c);
 }
 
@@ -68,13 +69,13 @@ void	find_param(t_data *d, char **av)
 {
 	while (av[d->cur_arg] && search_arg(av[d->cur_arg], d) == 1)
 	{
-		if (d->err_param == TRUE)
-		{
-			put_error(ERR_USAGE, d->name);
-			exit(0);
-		}
-		else
-			d->param = ft_strjoin(d->param, av[d->cur_arg]);
+		d->param = ft_strjoin(d->param, av[d->cur_arg]);
 		d->cur_arg++;
 	}
+	if (d->err_param == TRUE)
+	{
+		put_error(ERR_USAGE, d->name);
+		exit(0);
+	}
+
 }
