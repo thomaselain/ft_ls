@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:23:17 by telain            #+#    #+#             */
-/*   Updated: 2016/08/11 22:43:20 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/11 22:45:03 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int		read_file(t_data *d, char **av)
 		d->dir = opendir("./");
 		d->name = av[d->cur_arg];
 		d->file_arg = TRUE;
-//		put_error(ERR_NOFILE, d->name);
-//		d->cur_arg++;
 	}
 	*d->begin = new_file(NULL, d, d->name);
 	file = *d->begin;
