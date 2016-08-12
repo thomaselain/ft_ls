@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 14:34:19 by telain            #+#    #+#             */
-/*   Updated: 2016/08/11 22:27:41 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/12 16:42:00 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	display_infos(t_file *f, t_data *d)
 		ft_putstr(" ");
 		ft_putstr(f->file_name);
 		ft_putstr("\n");
+		d->displayed = TRUE;
 	}
 }
 

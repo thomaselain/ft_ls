@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:24:35 by telain            #+#    #+#             */
-/*   Updated: 2016/08/11 22:23:13 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/12 16:41:20 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct		s_data
 	int				biggest;
 	int				err_param;
 	int				file_arg;
+	int				displayed;
 	t_file			**begin;
 }					t_data;
 
