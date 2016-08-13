@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:24:35 by telain            #+#    #+#             */
-/*   Updated: 2016/08/12 16:41:20 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/13 13:52:39 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct		s_data
 
 /*
 **	main.c
+**	Apelle toutes les autres fonctions et initialise les variables
 */
 
 int		read_file(t_data *d, char **av);
@@ -69,6 +70,7 @@ void	data_init(t_data *d);
 
 /*
 **	parse_arg.c
+**	Gere les arguments et recupere les options utilisees
 */
 
 int		parse_arg(int ac, char **av, t_data *d);
@@ -77,12 +79,14 @@ void	find_param(t_data *d, char **av);
 
 /*
 **	put_error.c
+**	Affiche les cas d'erreur
 */
 
 void	put_error(int err, char *file);
 
 /*
 **	get_rights.c
+**	Recupere les droits d'un fichier et son type
 */
 
 void	get_rights(t_file *f, struct stat *s);
@@ -93,6 +97,7 @@ void	get_type(t_file *f, struct stat *s);
 
 /*
 **	list.c
+**	Cree les nouveaux fichiers, les nouvelles listes
 */
 
 void	new_list(t_data *d);
@@ -105,10 +110,18 @@ int		find_month(char *date);
 
 /*
 **	display_infos.c
+**	Affiche les informations du fichier passe en parametre
 */
 
 void	display_infos(t_file *f, t_data *d);
 void	put_n_spaces(int n);
 int		find_biggest_size(t_data *d);
+
+/*
+**	recursive.c
+**	Pour l'option -R                     WORK IN PROGRESS
+*/
+
+int		recursive(t_data *d);
 
 #endif
