@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:23:17 by telain            #+#    #+#             */
-/*   Updated: 2016/08/12 16:45:42 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/13 15:24:24 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,31 +63,13 @@ int		read_file(t_data *d, char **av)
 		sort_list_time(d, *d->begin, 1);
 	file = *d->begin;
 	file = file->next;
-	if (d->file_arg == FALSE)
+	if (ft_strchr(d->param, 'R'))
 	{
-		ft_putstr(d->name);
-		ft_putendl(" :");
+		recursive(d, file);
+		return (0);
 	}
-	while (file)
-	{
-		if (!ft_strcmp(file->file_name, d->name))
-		{
-			if (d->file_arg == TRUE)
-				display_infos(file, d);
-			else
-			{
-				d->cur_arg++;
-				put_error(ERR_NOFILE, d->name);
-			}
-		}
-		else if (d->file_arg == FALSE)
-			display_infos(file, d);
-		file = file->next;
-	}
-	if (d->displayed == FALSE)
-		put_error(ERR_NOFILE, d->name);
-	ft_putstr("\n");
-	d->cur_arg++;
+	else
+		display_folder(d, file);
 	closedir(d->dir);
 	return (0);
 }

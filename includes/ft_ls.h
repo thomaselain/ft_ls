@@ -6,7 +6,7 @@
 /*   By: telain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:24:35 by telain            #+#    #+#             */
-/*   Updated: 2016/08/13 13:52:39 by telain           ###   ########.fr       */
+/*   Updated: 2016/08/13 15:17:32 by telain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,13 @@ int		find_biggest_size(t_data *d);
 **	Pour l'option -R                     WORK IN PROGRESS
 */
 
-int		recursive(t_data *d);
+int		recursive(t_data *d, t_file *folder);
+
+/*
+**	display_folder.c
+**	Affiche les informations du dossier passe en parametre
+*/
+
+void	display_folder(t_data *d, t_file *file);
 
 #endif

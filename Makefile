@@ -6,7 +6,7 @@
 #    By: telain <telain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/22 17:19:39 by telain            #+#    #+#              #
-#    Updated: 2016/07/26 14:47:47 by telain           ###   ########.fr        #
+#    Updated: 2016/08/13 14:58:39 by telain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ SRC =  main.c\
 	   get_rights.c\
 	   list.c\
 	   display_infos.c\
+	   recursive.c\
+	   display_folder.c\
 
 OBJ = $(patsubst %.c,%.o,$(addprefix $(PATH_SRC), $(SRC)))
 
